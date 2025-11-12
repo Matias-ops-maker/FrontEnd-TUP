@@ -42,7 +42,7 @@ export default function Carrito() {
   };
 
   const vaciarCarrito = () => {
-    const confirmar = window.confirm('Â¿EstÃ¡s seguro de que quieres vaciar todo el carrito?');
+    const confirmar = window.confirm('¿Estás seguro de que quieres vaciar todo el carrito?');
     if (confirmar) {
       setCarrito([]);
       localStorage.removeItem('carrito');
@@ -87,7 +87,7 @@ export default function Carrito() {
 
       <div className="carrito-page-container">
         <div className="carrito-header">
-          <h1>ðŸ›’ Mi Carrito de Compras</h1>
+          <h1>🛒 Mi Carrito de Compras</h1>
           <button 
             className="btn-volver"
             onClick={() => navigate('/catalogo')}
@@ -108,10 +108,10 @@ export default function Carrito() {
         {carrito.length === 0 ? (
           <div className="carrito-vacio">
             <div style={{ textAlign: 'center', padding: '60px 20px' }}>
-              <h2>ðŸ›’ Tu carrito estÃ¡ vacÃ­o</h2>
-              <p>Â¡Agrega algunos productos increÃ­bles!</p>
+              <h2>🛒 Tu carrito está vacío</h2>
+              <p>¡Agrega algunos productos increíbles!</p>
               <Link to="/catalogo" className="btn-primary" style={{ marginTop: '20px', display: 'inline-block' }}>
-                Ir al CatÃ¡logo
+                Ir al Catálogo
               </Link>
             </div>
           </div>
@@ -133,7 +133,7 @@ export default function Carrito() {
                     fontSize: '14px'
                   }}
                 >
-                  ðŸ—‘ï¸ Vaciar Carrito
+                  🗑️ Vaciar Carrito
                 </button>
               </div>
 
@@ -145,15 +145,15 @@ export default function Carrito() {
                         src={item.imagen_url || item.image} 
                         alt={item.nombre || item.name}
                         onError={(e) => {
-                          e.target.src = 'https:
+                          e.target.src = 'https://via.placeholder.com/80x80/9ca3af?text=Error';
                         }}
                       />
                     </div>
                     
                     <div className="item-info-detalle">
                       <h4>{item.nombre || item.name}</h4>
-                      <p className="item-marca">ðŸ­ {item.brand || item.Brand?.nombre}</p>
-                      <p className="item-categoria">ðŸ·ï¸ {item.category || item.Category?.nombre}</p>
+                      <p className="item-marca">🏭 {item.brand || item.Brand?.nombre}</p>
+                      <p className="item-categoria">🏷️ {item.category || item.Category?.nombre}</p>
                       <p className="item-precio-unitario">
                         Precio unitario: {formatearPrecio(item.precio || item.price)}
                       </p>
@@ -191,7 +191,7 @@ export default function Carrito() {
                         cursor: 'pointer'
                       }}
                     >
-                      ðŸ—‘ï¸
+                      🗑️
                     </button>
                   </div>
                 ))}
@@ -200,7 +200,7 @@ export default function Carrito() {
 
             <div className="carrito-resumen">
               <div className="resumen-card">
-                <h3>ðŸ“‹ Resumen del Pedido</h3>
+                <h3>📋 Resumen del Pedido</h3>
                 
                 <div className="resumen-linea">
                   <span>Subtotal ({cantidadItems} items):</span>
@@ -208,10 +208,10 @@ export default function Carrito() {
                 </div>
                 
                 <div className="resumen-linea">
-                  <span>EnvÃ­o:</span>
+                  <span>Envío:</span>
                   <span>
                     {calcularEnvio() === 0 ? (
-                      <span style={{ color: '#10B981' }}>Â¡GRATIS!</span>
+                      <span style={{ color: '#10B981' }}>¡GRATIS!</span>
                     ) : (
                       formatearPrecio(calcularEnvio())
                     )}
@@ -235,7 +235,7 @@ export default function Carrito() {
                 <div className="envio-info">
                   {calcularSubtotal() < 100000 && (
                     <p style={{ fontSize: '0.9em', color: '#F59E0B', marginTop: '10px' }}>
-                      ðŸ’¡ Agrega {formatearPrecio(100000 - calcularSubtotal())} mÃ¡s para envÃ­o gratis
+                      💡 Agrega {formatearPrecio(100000 - calcularSubtotal())} más para envío gratis
                     </p>
                   )}
                 </div>
@@ -256,7 +256,7 @@ export default function Carrito() {
                     fontWeight: 'bold'
                   }}
                 >
-                  ðŸ’³ Proceder al Checkout con MercadoPago
+                  💳 Proceder al Checkout con MercadoPago
                 </Link>
                 
                 <Link 
@@ -274,7 +274,7 @@ export default function Carrito() {
                     fontSize: '14px'
                   }}
                 >
-                  ðŸ›ï¸ Seguir Comprando
+                  🛍️ Seguir Comprando
                 </Link>
               </div>
             </div>

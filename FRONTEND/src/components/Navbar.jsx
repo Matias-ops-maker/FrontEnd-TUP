@@ -24,11 +24,11 @@ export default function Navbar() {
         <nav className="nav-bar">
             <div className="nav-brand">
                 <Link to="/">
-                    <h2>ðŸª RepuestosAuto</h2>
+                    <h2>🪐 RepuestosAuto</h2>
                 </Link>
             </div>
             <div className="nav-links">
-                <Link to="/catalogo">CatÃ¡logo</Link>
+                <Link to="/catalogo">Catálogo</Link>
                 
                 {user ? (
                     <>

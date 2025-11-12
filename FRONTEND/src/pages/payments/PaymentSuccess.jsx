@@ -18,7 +18,8 @@ const PaymentSuccess = () => {
         if (paymentId) {
           const response = await api.get(`/payments/status/${paymentId}`);
           setPaymentInfo(response.data);
-        }
+        }
+
         localStorage.removeItem('carrito');
         
         setLoading(false);
@@ -51,7 +52,7 @@ const PaymentSuccess = () => {
     <div className="payment-result-container success">
       <div className="payment-result-card">
         <div className="success-icon">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http:
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="11" fill="#10b981"/>
             <path d="m9 12 2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>

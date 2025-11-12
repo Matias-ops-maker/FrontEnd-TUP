@@ -28,7 +28,7 @@ const MercadoPagoCheckout = ({ items, total, onSuccess, onError }) => {
           },
           auto_return: 'approved',
           external_reference: `order_${Date.now()}`,
-          notification_url: `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http:
+          notification_url: `${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:4000'}/api/payments/webhook`
         };
 
         const response = await api.post('/payments/create', paymentData);
