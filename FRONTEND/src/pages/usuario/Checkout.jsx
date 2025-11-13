@@ -212,7 +212,7 @@ export default function Checkout() {
                       src={item.image} 
                       alt={item.name}
                       onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/80x80/9ca3af?text=Error';
+                        e.target.src = 'https://via.placeholder.com/100x100/9ca3af?text=Error';
                       }}
                     />
                     <div className="item-info">

@@ -41,7 +41,8 @@ export default function Perfil() {
 
   const cargarDatos = async () => {
     try {
-      setLoading(true);
+      setLoading(true);
+
       const userData = localStorage.getItem('user');
       if (userData) {
         const parsedUser = JSON.parse(userData);
@@ -50,10 +51,12 @@ export default function Perfil() {
           nombre: parsedUser.nombre || '',
           telefono: parsedUser.telefono || ''
         });
-      }
+      }
+
       try {
         const response = await api.get('/orders');
-        if (response.data && response.data.orders) {
+        if (response.data && response.data.orders) {
+
           const ordersFormatted = response.data.orders.map(order => ({
             id: order.id,
             fecha: new Date(order.creado_en).toLocaleDateString('es-AR'),
@@ -133,12 +136,12 @@ export default function Perfil() {
     e.preventDefault();
     
     if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-      showMessage('Las contraseÃ±as no coinciden', 'error');
+      showMessage('Las contraseñas no coinciden', 'error');
       return;
     }
 
     if (passwordForm.newPassword.length < 6) {
-      showMessage('La nueva contraseÃ±a debe tener al menos 6 caracteres', 'error');
+      showMessage('La nueva contraseña debe tener al menos 6 caracteres', 'error');
       return;
     }
 
@@ -148,12 +151,12 @@ export default function Perfil() {
         newPassword: passwordForm.newPassword
       });
 
-      showMessage('ContraseÃ±a actualizada exitosamente', 'success');
+      showMessage('Contraseña actualizada exitosamente', 'success');
       setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
       setShowChangePassword(false);
     } catch (error) {
       showMessage(
-        error.response?.data?.error || 'Error al cambiar la contraseÃ±a',
+        error.response?.data?.error || 'Error al cambiar la contraseña',
         'error'
       );
     }
@@ -168,14 +171,15 @@ export default function Perfil() {
     }
 
     if (!emailForm.newEmail.includes('@')) {
-      showMessage('Por favor ingresa un email vÃ¡lido', 'error');
+      showMessage('Por favor ingresa un email válido', 'error');
       return;
     }
 
     try {
       await api.put('/auth/profile', {
         email: emailForm.newEmail
-      });
+      });
+
       const updatedUser = { ...user, email: emailForm.newEmail };
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -203,7 +207,8 @@ export default function Perfil() {
       await api.put('/auth/profile', {
         nombre: editForm.nombre,
         telefono: editForm.telefono
-      });
+      });
+
       const updatedUser = { ...user, nombre: editForm.nombre, telefono: editForm.telefono };
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -220,18 +225,19 @@ export default function Perfil() {
 
   const handleDeleteAccount = async () => {
     const confirmDelete = window.confirm(
-      'Â¿EstÃ¡s seguro de que quieres eliminar tu cuenta? Esta acciÃ³n no se puede deshacer.'
+      '¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.'
     );
     
     if (!confirmDelete) return;
 
-    const password = prompt('Por favor, ingresa tu contraseÃ±a para confirmar:');
+    const password = prompt('Por favor, ingresa tu contraseña para confirmar:');
     if (!password) return;
 
     try {
       await api.delete('/auth/account', {
         data: { password }
-      });
+      });
+
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       localStorage.removeItem('carrito');
@@ -271,7 +277,7 @@ export default function Perfil() {
     return (
       <div className="page">
         <div className="error-container">
-          <p>Error: No se pudo cargar la informaciÃ³n del usuario.</p>
+          <p>Error: No se pudo cargar la información del usuario.</p>
         </div>
       </div>
     );
@@ -300,16 +306,16 @@ export default function Perfil() {
               gap: '5px'
             }}
           >
-            â† Volver al Inicio
+            ← Volver al Inicio
           </button>
           <div className="perfil-avatar">
-            <span className="avatar-icon">ðŸ‘¤</span>
+            <span className="avatar-icon">👤</span>
           </div>
           <div className="perfil-info">
             <h1>Mi Perfil</h1>
             <p className="perfil-email">{user.email}</p>
             <span className={`perfil-role ${user.rol}`}>
-              {user.rol === 'admin' ? 'ðŸ‘‘ Administrador' : 'ðŸ‘¤ Usuario'}
+              {user.rol === 'admin' ? 'Administrador' : 'Usuario'}
             </span>
           </div>
         </div>
@@ -319,27 +325,27 @@ export default function Perfil() {
             className={`tab-button ${activeTab === 'perfil' ? 'active' : ''}`}
             onClick={() => setActiveTab('perfil')}
           >
-            ðŸ“‹ InformaciÃ³n Personal
+            Información Personal
           </button>
           <button 
             className={`tab-button ${activeTab === 'pedidos' ? 'active' : ''}`}
             onClick={() => setActiveTab('pedidos')}
           >
-            ðŸ›’ Mis Pedidos ({pedidos.length})
+            Mis Pedidos ({pedidos.length})
           </button>
           {user.rol === 'admin' && (
             <button 
               className={`tab-button ${activeTab === 'administracion' ? 'active' : ''}`}
               onClick={() => setActiveTab('administracion')}
             >
-              ðŸ‘‘ Panel de AdministraciÃ³n
+              Panel de Administración
             </button>
           )}
           <button 
             className={`tab-button ${activeTab === 'configuracion' ? 'active' : ''}`}
             onClick={() => setActiveTab('configuracion')}
           >
-            âš™ï¸ ConfiguraciÃ³n
+            Configuración
           </button>
         </div>
 
@@ -347,7 +353,7 @@ export default function Perfil() {
           {activeTab === 'perfil' && (
             <div className="tab-content">
               <div className="perfil-card">
-                <h3>ðŸ“ InformaciÃ³n Personal</h3>
+                <h3>Información Personal</h3>
                 <div className="perfil-data">
                   <div className="data-item">
                     <span className="data-label">Nombre:</span>
@@ -358,7 +364,7 @@ export default function Perfil() {
                     <span className="data-value">{user.email}</span>
                   </div>
                   <div className="data-item">
-                    <span className="data-label">TelÃ©fono:</span>
+                    <span className="data-label">Teléfono:</span>
                     <span className="data-value">{user.telefono || 'No especificado'}</span>
                   </div>
                   <div className="data-item">
@@ -376,7 +382,7 @@ export default function Perfil() {
                   className="btn-edit-profile"
                   onClick={() => setShowEditProfile(!showEditProfile)}
                 >
-                  âœï¸ Editar Perfil
+                  Editar Perfil
                 </button>
                 
                 {showEditProfile && (
@@ -395,7 +401,7 @@ export default function Perfil() {
                         />
                       </div>
                       <div className="form-group">
-                        <label>TelÃ©fono:</label>
+                        <label>Telefono:</label>
                         <input
                           type="tel"
                           value={editForm.telefono}
@@ -429,15 +435,15 @@ export default function Perfil() {
           {activeTab === 'pedidos' && (
             <div className="tab-content">
               <div className="pedidos-container">
-                <h3>ðŸ›’ Historial de Pedidos</h3>
+                <h3>Historial de Pedidos</h3>
                 {pedidos.length === 0 ? (
                   <div className="no-pedidos">
-                    <p>ðŸ“¦ No tienes pedidos aÃºn.</p>
+                    <p>No tienes pedidos aún.</p>
                     <button 
                       className="btn-primary"
                       onClick={() => navigate('/catalogo')}
                     >
-                      Ir al CatÃ¡logo
+                      Ir al Catálogo
                     </button>
                   </div>
                 ) : (
@@ -447,7 +453,7 @@ export default function Perfil() {
                         <div className="pedido-header">
                           <div className="pedido-info">
                             <h4>Pedido #{pedido.id}</h4>
-                            <p className="pedido-fecha">ðŸ“… {new Date(pedido.fecha).toLocaleDateString('es-AR')}</p>
+                            <p className="pedido-fecha">{new Date(pedido.fecha).toLocaleDateString('es-AR')}</p>
                           </div>
                           <div className="pedido-estado">
                             <span 
@@ -483,103 +489,99 @@ export default function Perfil() {
           {activeTab === 'administracion' && user.rol === 'admin' && (
             <div className="tab-content">
               <div className="admin-panel-container">
-                <h3>ðŸ‘‘ Panel de AdministraciÃ³n</h3>
-                <p className="admin-welcome">Bienvenido al panel de control administrativo. Desde aquÃ­ puedes gestionar todos los aspectos de la tienda.</p>
+                <h3>Panel de Administración</h3>
+                <p className="admin-welcome">Bienvenido al panel de control administrativo. Desde aquí puedes gestionar todos los aspectos de la tienda.</p>
                 
                 <div className="admin-sections">
                   <div className="admin-section">
-                    <h4>ðŸ“¦ GestiÃ³n de Productos</h4>
+                    <h4>Gestión de Productos</h4>
                     <div className="admin-buttons">
                       <button 
                         className="admin-action-btn primary"
                         onClick={() => navigate('/admin/products')}
                       >
-                        ðŸ“‹ Ver Todos los Productos
+                        Ver Todos los Productos
                       </button>
                       <button 
                         className="admin-action-btn success"
                         onClick={() => navigate('/admin/products/new')}
                       >
-                        âž• Agregar Nuevo Producto
+                        + Agregar Nuevo Producto
                       </button>
                     </div>
                     <div className="admin-stats">
-                      <span className="stat-item">ðŸ“Š Productos en stock</span>
-                      <span className="stat-item">âš ï¸ Productos con bajo stock</span>
+                      <span className="stat-item">Productos en stock</span>
+                      <span className="stat-item">Productos con bajo stock</span>
                     </div>
                   </div>
 
                   <div className="admin-section">
-                    <h4>ðŸ›’ GestiÃ³n de Pedidos</h4>
+                    <h4>Gestión de Pedidos</h4>
                     <div className="admin-buttons">
                       <button 
                         className="admin-action-btn primary"
                         onClick={() => navigate('/admin/orders')}
                       >
-                        ðŸ“‹ Ver Todos los Pedidos
+                        Ver Todos los Pedidos
                       </button>
                       <button 
                         className="admin-action-btn warning"
                         onClick={() => navigate('/admin/orders?status=pending')}
                       >
-                        â³ Pedidos Pendientes
+                        Pedidos Pendientes
                       </button>
                     </div>
                   </div>
 
                   <div className="admin-section">
-                    <h4>ðŸ“Š Reportes y AnÃ¡lisis</h4>
+                    <h4>Reportes y Análisis</h4>
                     <div className="admin-buttons">
                       <button 
                         className="admin-action-btn primary"
                         onClick={() => navigate('/admin/reports')}
                       >
-                        ðŸ“ˆ Ver Reportes
+                        Ver Reportes
                       </button>
                       <button 
                         className="admin-action-btn info"
                         onClick={() => navigate('/admin/dashboard')}
                       >
-                        ðŸŽ›ï¸ Dashboard General
+                        Dashboard General
                       </button>
                     </div>
                   </div>
 
                   <div className="admin-section">
-                    <h4>ðŸª GestiÃ³n de CategorÃ­as</h4>
+                    <h4>Gestión de Categorías</h4>
                     <div className="admin-buttons">
                       <button 
                         className="admin-action-btn primary"
                         onClick={() => navigate('/admin/categories')}
                       >
-                        ðŸ·ï¸ Gestionar CategorÃ­as
+                        Gestionar Categorías
                       </button>
                       <button 
                         className="admin-action-btn primary"
                         onClick={() => navigate('/admin/brands')}
                       >
-                        ðŸ­ Gestionar Marcas
+                        Gestionar Marcas
                       </button>
                     </div>
                   </div>
 
                   <div className="admin-section quick-actions">
-                    <h4>âš¡ Acciones RÃ¡pidas</h4>
+                    <h4>Acciones Rápidas</h4>
                     <div className="quick-actions-grid">
                       <div className="quick-action-card" onClick={() => navigate('/admin/products')}>
-                        <span className="quick-icon">ðŸ“¦</span>
                         <span className="quick-text">Productos</span>
                       </div>
                       <div className="quick-action-card" onClick={() => navigate('/admin/orders')}>
-                        <span className="quick-icon">ðŸ›’</span>
                         <span className="quick-text">Pedidos</span>
                       </div>
                       <div className="quick-action-card" onClick={() => navigate('/admin/reports')}>
-                        <span className="quick-icon">ðŸ“Š</span>
                         <span className="quick-text">Reportes</span>
                       </div>
                       <div className="quick-action-card" onClick={() => navigate('/admin/dashboard')}>
-                        <span className="quick-icon">ðŸŽ›ï¸</span>
                         <span className="quick-text">Dashboard</span>
                       </div>
                     </div>
@@ -592,7 +594,7 @@ export default function Perfil() {
           {activeTab === 'configuracion' && (
             <div className="tab-content">
               <div className="configuracion-container">
-                <h3>âš™ï¸ ConfiguraciÃ³n de Cuenta</h3>
+                <h3>Configuracion de Cuenta</h3>
                 
                 {message && (
                   <div className={`message ${messageType}`}>
@@ -601,19 +603,19 @@ export default function Perfil() {
                 )}
                 
                 <div className="config-section">
-                  <h4>ðŸ” Seguridad</h4>
+                  <h4>Seguridad</h4>
                   <button 
                     className="config-button"
                     onClick={() => setShowChangePassword(!showChangePassword)}
                   >
-                    ðŸ”‘ Cambiar ContraseÃ±a
+                    Cambiar Contrasena
                   </button>
                   
                   {showChangePassword && (
                     <div className="config-form">
                       <form onSubmit={handleChangePassword}>
                         <div className="form-group">
-                          <label>ContraseÃ±a actual:</label>
+                          <label>Contrasena actual:</label>
                           <input
                             type="password"
                             value={passwordForm.currentPassword}
@@ -625,7 +627,7 @@ export default function Perfil() {
                           />
                         </div>
                         <div className="form-group">
-                          <label>Nueva contraseÃ±a:</label>
+                          <label>Nueva contrasena:</label>
                           <input
                             type="password"
                             value={passwordForm.newPassword}
@@ -638,7 +640,7 @@ export default function Perfil() {
                           />
                         </div>
                         <div className="form-group">
-                          <label>Confirmar nueva contraseÃ±a:</label>
+                          <label>Confirmar nueva contrasena:</label>
                           <input
                             type="password"
                             value={passwordForm.confirmPassword}
@@ -670,7 +672,7 @@ export default function Perfil() {
                     className="config-button"
                     onClick={() => setShowChangeEmail(!showChangeEmail)}
                   >
-                    ðŸ“§ Cambiar Email
+                    Cambiar Email
                   </button>
                   
                   {showChangeEmail && (
@@ -728,7 +730,7 @@ export default function Perfil() {
                 </div>
 
                 <div className="config-section">
-                  <h4>ðŸ”” Notificaciones</h4>
+                  <h4>Notificaciones</h4>
                   <div className="config-toggle">
                     <label>
                       <input type="checkbox" defaultChecked />
@@ -749,10 +751,10 @@ export default function Perfil() {
                     className="config-button danger"
                     onClick={handleDeleteAccount}
                   >
-                    ðŸ—‘ï¸ Eliminar Cuenta
+                    Eliminar Cuenta
                   </button>
                   <p style={{ fontSize: '0.9em', color: '#666', marginTop: '10px' }}>
-                    Esta acciÃ³n no se puede deshacer. Se eliminarÃ¡n todos tus datos permanentemente.
+                    Esta accion no se puede deshacer. Se eliminaran todos tus datos permanentemente.
                   </p>
                 </div>
               </div>

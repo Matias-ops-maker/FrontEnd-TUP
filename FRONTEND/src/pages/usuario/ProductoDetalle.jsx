@@ -155,7 +155,7 @@ export default function ProductoDetalle() {
             <div className="producto-header">
               <span className="producto-categoria">{producto.category}</span>
               <h1>{producto.nombre}</h1>
-              <p className="producto-marca">ðŸ­ {producto.Brand?.nombre || 'Sin marca'}</p>
+              <p className="producto-marca">🏭 {producto.Brand?.nombre || 'Sin marca'}</p>
             </div>
 
             <div className="producto-precio-seccion">
@@ -164,19 +164,19 @@ export default function ProductoDetalle() {
               </div>
               <div className="stock-info">
                 <span className={`stock-badge ${producto.stock > 100 ? 'high' : producto.stock > 50 ? 'medium' : 'low'}`}>
-                  ðŸ“¦ Stock: {producto.stock} unidades
+                  📦 Stock: {producto.stock} unidades
                 </span>
               </div>
             </div>
 
             <div className="producto-descripcion">
-              <h3>ðŸ“‹ DescripciÃ³n</h3>
+              <h3>📋 Descripción</h3>
               <p>{producto.descripcion}</p>
             </div>
 
             {producto.especificaciones && (
               <div className="producto-especificaciones">
-                <h3>âš™ï¸ Especificaciones</h3>
+                <h3>⚙️ Especificaciones</h3>
                 <ul>
                   {producto.especificaciones.map((spec, index) => (
                     <li key={index}>{spec}</li>
@@ -187,7 +187,7 @@ export default function ProductoDetalle() {
 
             {producto.garantia && (
               <div className="producto-garantia">
-                <h3>ðŸ›¡ï¸ GarantÃ­a</h3>
+                <h3>🛡️ Garantía</h3>
                 <p>{producto.garantia}</p>
               </div>
             )}
@@ -233,7 +233,7 @@ export default function ProductoDetalle() {
                   marginTop: '20px'
                 }}
               >
-                {producto.stock === 0 ? 'âŒ Agotado' : 'ðŸ›’ Agregar al Carrito'}
+                {producto.stock === 0 ? '❌ Agotado' : '🛒 Agregar al Carrito'}
               </button>
             </div>
           </div>

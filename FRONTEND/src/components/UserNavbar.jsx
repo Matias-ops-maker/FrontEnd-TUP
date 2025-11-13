@@ -95,7 +95,7 @@ export default function UserNavbar() {
                             fontWeight: 'bold'
                         }}
                     >
-                        🪐 RepuestosAuto
+                        🚗 RepuestosAuto
                     </Link>
                 </div>
                 
@@ -193,7 +193,7 @@ export default function UserNavbar() {
                                     background: '#3B82F6'
                                 }}
                             >
-                                🔑 Iniciar Sesión
+                                🔐 Iniciar Sesión
                             </Link>
                             <Link 
                                 to="/auth/register"

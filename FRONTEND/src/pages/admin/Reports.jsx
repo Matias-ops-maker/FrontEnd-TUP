@@ -13,7 +13,7 @@ export default function Reports() {
             return;
         }
 
-        const res = await fetch(`http://localhost:4000/api/reports/${type}?format=${format}`, {
+        const res = await fetch(`http://localhost:4000/api/reports/sales/excel`, {
             headers: { 
                 "x-api-key": "mi_api_key_super_secreta",
                 "Authorization": `Bearer ${token}`

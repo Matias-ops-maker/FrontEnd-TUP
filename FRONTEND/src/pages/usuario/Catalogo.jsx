@@ -320,7 +320,7 @@ export default function Catalogo() {
                       onError={(e) => {
                         e.target.src = 'https://via.placeholder.com/200x150/9ca3af?text=Error';
                       }}
-                    />}
+                    />
                     {producto.stock < 50 && (
                       <span className="stock-bajo">¡Pocas unidades!</span>
                     )}

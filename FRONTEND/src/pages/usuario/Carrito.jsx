@@ -88,7 +88,7 @@ export default function Carrito() {
       <div className="carrito-page-container">
         <div className="carrito-header">
           <h1>🛒 Mi Carrito de Compras</h1>
-          <button 
+          <button
             className="btn-volver"
             onClick={() => navigate('/catalogo')}
             style={{
@@ -101,7 +101,7 @@ export default function Carrito() {
               fontSize: '14px'
             }}
           >
-            â† Seguir Comprando
+            ← Seguir Comprando
           </button>
         </div>
 
@@ -145,7 +145,7 @@ export default function Carrito() {
                         src={item.imagen_url || item.image} 
                         alt={item.nombre || item.name}
                         onError={(e) => {
-                          e.target.src = 'https://via.placeholder.com/80x80/9ca3af?text=Error';
+                          e.target.src = 'https://via.placeholder.com/100x100/9ca3af?text=Error';
                         }}
                       />
                     </div>
@@ -274,7 +274,7 @@ export default function Carrito() {
                     fontSize: '14px'
                   }}
                 >
-                  🛍️ Seguir Comprando
+                  🛒 Seguir Comprando
                 </Link>
               </div>
             </div>

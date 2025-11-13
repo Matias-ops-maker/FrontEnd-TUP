@@ -31,8 +31,7 @@ const PaymentPending = () => {
     if (paymentInfo?.payment_id) {
       try {
         const response = await api.get(`/payments/status/${paymentInfo.payment_id}`);
-        setPaymentInfo(response.data);
-
+        setPaymentInfo(response.data);
         if (response.data.status === 'approved') {
           navigate('/payment-success');
         }
@@ -58,7 +57,7 @@ const PaymentPending = () => {
     <div className="payment-result-container pending">
       <div className="payment-result-card">
         <div className="pending-icon">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http:
             <circle cx="12" cy="12" r="11" fill="#f59e0b"/>
             <circle cx="12" cy="12" r="3" fill="white"/>
           </svg>

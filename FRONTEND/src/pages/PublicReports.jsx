@@ -14,13 +14,13 @@ export default function PublicReports() {
       let url = '';
       
       if (type === 'sales' && format === 'pdf') {
-        url = 'http://localhost:4000/api/public-reports/sales?format=pdf';
+        url = 'http:
       } else if (type === 'sales' && format === 'xlsx') {
-        url = 'http://localhost:4000/api/public-reports/sales?format=xlsx';
+        url = 'http:
       } else if (type === 'inventory' && format === 'pdf') {
-        url = 'http://localhost:4000/api/public-reports/inventory?format=pdf';
+        url = 'http:
       } else if (type === 'inventory' && format === 'xlsx') {
-        url = 'http://localhost:4000/api/public-reports/inventory?format=xlsx';
+        url = 'http:
       }
       
       if (url) {
